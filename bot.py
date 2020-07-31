@@ -6,15 +6,15 @@ import discord
 from discord.ext import tasks, commands
 from dotenv import load_dotenv
 
-load_dotenv() 
-TOKEN = os.environ.get("DISCORD_TOKEN")
+load_dotenv()
+token = os.getenv('DISCORD_TOKEN')
 
-rundownBot = commands.Bot(command_prefix = '!') 
+rundownBot = commands.Bot(command_prefix = '!')
 
-#lists to store the names of active users. Number represent the number of hours before list is cleared. 
-activeMembers1 = [] 
-activeMembers2 = [] 
-activeMembers3 = [] 
+#lists to store the names of active users. Number represent the number of hours before list is cleared.
+activeMembers1 = []
+activeMembers2 = []
+activeMembers3 = []
 
 @rundownBot.event # function to show the bot is ready and to start the task loop
 async def on_ready():
@@ -32,14 +32,14 @@ async def on_message(message):
       activeMembers2.append(message.author.name)
       print('Active user list 2 hour updated')
     if message.author.name not in activeMembers3:
-      activeMembers3.append(message.author.name) 
+      activeMembers3.append(message.author.name)
       print('Active user list 3 hour updated')
     await rundownBot.process_commands(message)
 
 @rundownBot.command(hidden=True)    #the three commands for DM'ing the list of users.
 async def rundown1(message):
     await message.author.send(activeMembers1)
-@rundownBot.command(hidden=True)    
+@rundownBot.command(hidden=True)
 async def rundown2(message):
     await message.author.send(activeMembers2)
 @rundownBot.command(hidden=True)
@@ -60,5 +60,5 @@ async def clearList2():
 async def clearList3():
   activeMembers3.clear()
   print('Active user list 3 hour cleared')
-    
-rundownBot.run(DISCORD_TOKEN)
+
+rundownBot.run(token)
