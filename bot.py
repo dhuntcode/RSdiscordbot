@@ -35,6 +35,13 @@ async def on_message(message):
       activeMembers3.append(message.author.name)
       print('Active user list 3 hour updated')
     await rundownBot.process_commands(message)
+from discord.ext.commands import CommandNotFound
+
+@rundownBot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        return
+    raise error
 
 @rundownBot.command(hidden=True)    #the three commands for DM'ing the list of users.
 async def rundown1(message):
