@@ -27,13 +27,13 @@ async def on_ready():
 async def on_message(message):
     if message.author.name not in activeMembers1:
       activeMembers1.append(message.author.name)
-      print('Active user list 1 hour updated')
+      #print('Active user list 1 hour updated')
     if message.author.name not in activeMembers2:
       activeMembers2.append(message.author.name)
-      print('Active user list 2 hour updated')
+      #print('Active user list 2 hour updated')
     if message.author.name not in activeMembers3:
       activeMembers3.append(message.author.name)
-      print('Active user list 3 hour updated')
+      #print('Active user list 3 hour updated')
     await rundownBot.process_commands(message)
 from discord.ext.commands import CommandNotFound
 
@@ -56,16 +56,16 @@ async def rundown3(message):
 @tasks.loop(hours=1)     #three loops to clear the lists of names on specific hours
 async def clearList1():
   activeMembers1.clear()
-  print('Active user list 1 hour cleared')
+  #print('Active user list 1 hour cleared')
 
 @tasks.loop(hours=2)
 async def clearList2():
   activeMembers2.clear()
-  print('Active user list 2 hour cleared')
+  #print('Active user list 2 hour cleared')
 
 @tasks.loop(hours=3)
 async def clearList3():
   activeMembers3.clear()
-  print('Active user list 3 hour cleared')
+  #print('Active user list 3 hour cleared')
 
 rundownBot.run(token)
