@@ -1,5 +1,5 @@
 #      A Discord Bot to list active users during live shows on RadioSEGA
-#      Written by INeedFruit 2020
+#      Written by Dean
 
 import os
 import discord
